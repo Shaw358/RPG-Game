@@ -93,14 +93,6 @@ public class GameManager : MonoBehaviour
             { GameObject.Find("Button3").GetComponent<TextMeshPro>(),GameObject.Find("Button6").GetComponent<TextMeshPro>()}
         };
 
-        /*locationArray = new Transform[3, 2]
-        {
-            { GameObject.Find("SelectorLocation1").GetComponent<Transform>(), GameObject.Find("SelectorLocation4").GetComponent<Transform>()},
-            { GameObject.Find("SelectorLocation2").GetComponent<Transform>(), GameObject.Find("SelectorLocation5").GetComponent<Transform>()},
-            { GameObject.Find("SelectorLocation3").GetComponent<Transform>(), GameObject.Find("SelectorLocation6").GetComponent<Transform>()},
-        };
-        */
-
         /*StartCoroutine(mainCharacter.AnimatorTester());
         textPro[0].text = "Attack";
         textPro[1].text = "Magic";
@@ -113,11 +105,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if(diamondVector.y +1 < buttonArray.GetLength(1)) // pakt y as van md array
             {
                 selectorGem.setLocation(x, y);
+                y--;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -125,6 +119,7 @@ public class GameManager : MonoBehaviour
             if (diamondVector.y - 1 < buttonArray.GetLength(1)) // pakt y as van md array
             {
                 selectorGem.setLocation(x, y);
+                y++;
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -132,6 +127,7 @@ public class GameManager : MonoBehaviour
             if (diamondVector.x + 1 < buttonArray.GetLength(0)) // pakt x as van md array
             {
                 selectorGem.setLocation(x, y);
+                x--;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -139,18 +135,12 @@ public class GameManager : MonoBehaviour
             if (diamondVector.x - 1 < buttonArray.GetLength(0)) // pakt x as van md array
             {
                 selectorGem.setLocation(x, y);
+                x++;
             }
         }
     }
 
     #region battleMenu / Interface
-
-
-
-
-
-
-
 
     #endregion
 
