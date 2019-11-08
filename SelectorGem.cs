@@ -6,44 +6,21 @@ public class SelectorGem : MonoBehaviour
 {
     [SerializeField] private Transform thisGameObject;
     //Transforms for the selector
-    [SerializeField] private Transform[] selectorLocation;
+    [SerializeField] Transform[,] locationArrayGem = new Transform[3, 2];
 
     void Start()
     {
-        thisGameObject = selectorLocation[0];
-
+        locationArrayGem = new Transform[3, 2]
+        {
+            { GameObject.Find("SelectorLocation1").GetComponent<Transform>(),GameObject.Find("SelectorLocation4").GetComponent<Transform>() },
+            { GameObject.Find("SelectorLocation2").GetComponent<Transform>(),GameObject.Find("SelectorLocation5").GetComponent<Transform>() },
+            { GameObject.Find("SelectorLocation3").GetComponent<Transform>(),GameObject.Find("SelectorLocation6").GetComponent<Transform>() },
+        };
+        thisGameObject = locationArrayGem[0, 0];
     }
 
-    public void setLocation(int i)
+    public void setLocation(int x,int y)
     {
-        switch (i)
-        {
-            case 0:
-                thisGameObject = selectorLocation[i];
-
-                break;
-            case 1:
-                thisGameObject = selectorLocation[i];
-
-                break;
-            case 2:
-                thisGameObject = selectorLocation[i];
-
-                break;
-            case 3:
-                thisGameObject = selectorLocation[i];
-
-                break;
-            case 4:
-                thisGameObject = selectorLocation[i];
-
-                break;
-            case 5:
-                thisGameObject = selectorLocation[i];
-                
-                break;
-
-
-        }
+        thisGameObject = locationArrayGem[x, y];
     }
 }
