@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
 
     Vector2 diamondVector;
 
-    private int buttonIndexer;
+    [SerializeField] private int x, y;
+
 
     //General game stats
+    [SerializeField] private GameObject[] inventory;
     [SerializeField] private GameObject[] charactersSelected;
     [SerializeField] private int gold;
     [SerializeField] private int exp;
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    #region characterScript
+
     [SerializeField] private bool battleStarts;
     [SerializeField] private Transform[] characterPosition;
 
@@ -62,6 +66,8 @@ public class GameManager : MonoBehaviour
     //tertiary character scripts
     [SerializeField] private c3Script scriptC3;
 
+    #endregion
+
     //Selected enemy to attack
     private GameObject enemySelected;
 
@@ -69,31 +75,31 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         mainCharacter = GameObject.Find("Adventurer").GetComponent<MainCharacter>();
-    }
-
-    private void Start()
-    {
-        buttonArray = new TextMeshPro[3, 2]
-        { 
-            { GameObject.Find("Button1").GetComponent<TextMeshPro>(), GameObject.Find("Button4").GetComponent<TextMeshPro>()},
-            { GameObject.Find("Button2").GetComponent<TextMeshPro>(),GameObject.Find("Button5").GetComponent<TextMeshPro>()},
-            { GameObject.Find("Button3").GetComponent<TextMeshPro>(),GameObject.Find("Button6").GetComponent<TextMeshPro>()}
-        };
-
-        locationArray = new Transform[3, 2]
-        {
-            { GameObject.Find("SelectorLocation1").GetComponent<Transform>(), GameObject.Find("SelectorLocation4").GetComponent<Transform>()},
-            { GameObject.Find("SelectorLocation2").GetComponent<Transform>(), GameObject.Find("SelectorLocation5").GetComponent<Transform>()},
-            { GameObject.Find("SelectorLocation3").GetComponent<Transform>(), GameObject.Find("SelectorLocation6").GetComponent<Transform>()},
-        };
-
-
-        buttonIndexer = 1;
 
         gold = 10;
         c1Level = 1;
         c2Level = 1;
         c3Level = 1;
+    }
+
+    private void Start()
+    {
+        x = 0;
+        y = 0;
+        buttonArray = new TextMeshPro[3, 2]
+        { 
+            { GameObject.Find("Button1").GetComponent<TextMeshPro>(),GameObject.Find("Button4").GetComponent<TextMeshPro>()},
+            { GameObject.Find("Button2").GetComponent<TextMeshPro>(),GameObject.Find("Button5").GetComponent<TextMeshPro>()},
+            { GameObject.Find("Button3").GetComponent<TextMeshPro>(),GameObject.Find("Button6").GetComponent<TextMeshPro>()}
+        };
+
+        /*locationArray = new Transform[3, 2]
+        {
+            { GameObject.Find("SelectorLocation1").GetComponent<Transform>(), GameObject.Find("SelectorLocation4").GetComponent<Transform>()},
+            { GameObject.Find("SelectorLocation2").GetComponent<Transform>(), GameObject.Find("SelectorLocation5").GetComponent<Transform>()},
+            { GameObject.Find("SelectorLocation3").GetComponent<Transform>(), GameObject.Find("SelectorLocation6").GetComponent<Transform>()},
+        };
+        */
 
         /*StartCoroutine(mainCharacter.AnimatorTester());
         textPro[0].text = "Attack";
@@ -109,30 +115,30 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if(diamondVector.y +1 < buttonArray.GetLength(1)) // pakt y as
+            if(diamondVector.y +1 < buttonArray.GetLength(1)) // pakt y as van md array
             {
-                selectorGem.setLocation(1);
+                selectorGem.setLocation(x, y);
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (diamondVector.y - 1 < buttonArray.GetLength(1)) // pakt y as
+            if (diamondVector.y - 1 < buttonArray.GetLength(1)) // pakt y as van md array
             {
-                selectorGem.setLocation(0);
+                selectorGem.setLocation(x, y);
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (diamondVector.y + 1 < buttonArray.GetLength(0)) // pakt x as
+            if (diamondVector.x + 1 < buttonArray.GetLength(0)) // pakt x as van md array
             {
-                selectorGem.setLocation(0);
+                selectorGem.setLocation(x, y);
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (diamondVector.y - 1 < buttonArray.GetLength(0)) // pakt x as
+            if (diamondVector.x - 1 < buttonArray.GetLength(0)) // pakt x as van md array
             {
-                selectorGem.setLocation(0);
+                selectorGem.setLocation(x, y);
             }
         }
     }
@@ -147,6 +153,7 @@ public class GameManager : MonoBehaviour
 
 
     #endregion
+
 
     private void BattleStarts()
     {
