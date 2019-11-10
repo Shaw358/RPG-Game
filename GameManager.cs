@@ -86,11 +86,13 @@ public class GameManager : MonoBehaviour
     {
         x = 0;
         y = 0;
+        diamondVector = new Vector2(x, y);
+
         buttonArray = new TextMeshPro[3, 2]
         { 
-            { GameObject.Find("Button1").GetComponent<TextMeshPro>(),GameObject.Find("Button4").GetComponent<TextMeshPro>()},
-            { GameObject.Find("Button2").GetComponent<TextMeshPro>(),GameObject.Find("Button5").GetComponent<TextMeshPro>()},
-            { GameObject.Find("Button3").GetComponent<TextMeshPro>(),GameObject.Find("Button6").GetComponent<TextMeshPro>()}
+            { GameObject.Find("Button1").GetComponent<TextMeshPro>(),GameObject.Find("Button2").GetComponent<TextMeshPro>()},
+            { GameObject.Find("Button3").GetComponent<TextMeshPro>(),GameObject.Find("Button4").GetComponent<TextMeshPro>()},
+            { GameObject.Find("Button5").GetComponent<TextMeshPro>(),GameObject.Find("Button6").GetComponent<TextMeshPro>()}
         };
 
         /*StartCoroutine(mainCharacter.AnimatorTester());
@@ -105,42 +107,51 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(x + y);
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if(diamondVector.y +1 < buttonArray.GetLength(1)) // pakt y as van md array
+            if(diamondVector.y - 1 < buttonArray.GetLength(1)) // pakt y as van md array
             {
-                selectorGem.setLocation(x, y);
                 y--;
+                selectorGem.setLocation(x, y);
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (diamondVector.y - 1 < buttonArray.GetLength(1)) // pakt y as van md array
+            if (diamondVector.y + 1 < buttonArray.GetLength(1)) // pakt y as van md array
             {
-                selectorGem.setLocation(x, y);
                 y++;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (diamondVector.x + 1 < buttonArray.GetLength(0)) // pakt x as van md array
-            {
-                selectorGem.setLocation(x, y);
-                x--;
+                selectorGem.setLocation(x, y);                
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (diamondVector.x - 1 < buttonArray.GetLength(0)) // pakt x as van md array
+            if (diamondVector.y + 1 < buttonArray.GetLength(0)) // pakt x as van md array
             {
-                selectorGem.setLocation(x, y);
                 x++;
+                selectorGem.setLocation(x, y);
             }
         }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (diamondVector.y - 1 < buttonArray.GetLength(0)) // pakt x as van md array
+            {
+                x--;
+                selectorGem.setLocation(x, y);
+            }
+        }
+        
     }
 
     #region battleMenu / Interface
+
+
+
+
+
+
+
 
     #endregion
 
